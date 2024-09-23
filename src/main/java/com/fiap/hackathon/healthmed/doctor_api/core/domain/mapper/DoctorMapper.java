@@ -32,18 +32,4 @@ public interface DoctorMapper {
             return UserAuthType.DOCTOR;
         }
     }
-
-//    default EnumSet<UserAuthType> enumSetFromValue(UserAuthType value) {
-//        if (value == null) {
-//            return null;
-//        }
-//        return EnumSet.of(value);
-//    }
-//
-//    default UserAuthType stringToEnum(String value) {
-//        if (value == null || value.isEmpty()) {
-//            return null;
-//        }
-//        return UserAuthType.valueOf(value.toUpperCase());
-//    }
 }
