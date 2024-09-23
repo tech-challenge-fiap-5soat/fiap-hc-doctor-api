@@ -4,6 +4,8 @@ import com.fiap.hackathon.healthmed.doctor_api.core.service.AppointmentService;
 import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.impl.AppointmentControllerImpl;
 import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.AppointmentCreateRequest;
 import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.AppointmentUpdateRequest;
+import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.DoctorAppointmentCreateRequest;
+import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.DoctorAppointmentCreateRequestTestUtils;
 import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.response.AppointmentResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +20,7 @@ import java.util.UUID;
 import static com.fiap.hackathon.healthmed.doctor_api.common.constants.TestsConstants.RANDON_UUID;
 import static com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.AppointmentCreateRequestTestUtils.getAppointmentCreateRequest;
 import static com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.AppointmentUpdateRequestTestUtils.getAppointmentUpdateRequest;
+import static com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.DoctorAppointmentCreateRequestTestUtils.getDoctorAppointmentCreateRequest;
 import static com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.response.AppointmentResponseTestUtils.getAppointmentResponse;
 import static com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.response.AppointmentResponseTestUtils.getAppointmentResponseAsList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -39,18 +42,14 @@ class AppointmentControllerTest {
     @Test
     void testCreateSuccessful() {
         // Arrange
-        AppointmentCreateRequest request = getAppointmentCreateRequest();
-        AppointmentResponse expectedResponse = getAppointmentResponse();
-
-        when(appointmentService.createAppointment(any(AppointmentCreateRequest.class))).thenReturn(expectedResponse);
+        DoctorAppointmentCreateRequest request = getDoctorAppointmentCreateRequest();
 
         // Act
-        ResponseEntity<AppointmentResponse> actualResponse = appointmentController.create(request);
+        ResponseEntity<Void> actualResponse = appointmentController.create(request);
 
         // Assert
         assertNotNull(actualResponse);
         assertEquals(CREATED, actualResponse.getStatusCode());
-        assertEquals(expectedResponse, actualResponse.getBody());
         verify(appointmentService).createAppointment(request);
     }
 

@@ -8,11 +8,14 @@ import com.fiap.hackathon.healthmed.doctor_api.core.service.impl.AppointmentServ
 import com.fiap.hackathon.healthmed.doctor_api.dataprovider.repository.AppointmentRepository;
 import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.AppointmentCreateRequest;
 import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.AppointmentUpdateRequest;
+import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.DoctorAppointmentCreateRequest;
+import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.DoctorAppointmentCreateRequestTestUtils;
 import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.response.AppointmentResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
@@ -26,10 +29,12 @@ import static com.fiap.hackathon.healthmed.doctor_api.core.domain.model.Appointm
 import static com.fiap.hackathon.healthmed.doctor_api.core.domain.model.DoctorTestUtils.getOptionalOfDoctor;
 import static com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.AppointmentCreateRequestTestUtils.getAppointmentCreateRequest;
 import static com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.AppointmentUpdateRequestTestUtils.getAppointmentUpdateRequest;
+import static com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.DoctorAppointmentCreateRequestTestUtils.getDoctorAppointmentCreateRequest;
 import static com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.response.AppointmentResponseTestUtils.getAppointmentResponse;
 import static com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.response.AppointmentResponseTestUtils.getAppointmentResponseAsList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyIterable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -51,29 +56,25 @@ class AppointmentServiceTest {
     @Test
     void testCreateAppointmentSuccessful() {
         // Arrange
-        AppointmentCreateRequest request = getAppointmentCreateRequest();
-        Appointment appointment = getAppointment();
+        DoctorAppointmentCreateRequest request = getDoctorAppointmentCreateRequest();
 
         Optional<Doctor> doctorOp = getOptionalOfDoctor();
 
-        when(doctorService.findDoctorById(RANDON_UUID)).thenReturn(doctorOp);
-        when(appointmentRepository.save(any(Appointment.class))).thenReturn(appointment);
+        when(doctorService.findDoctorById(request.doctorId())).thenReturn(doctorOp);
 
         // Act
-        AppointmentResponse actualResponse = appointmentService.createAppointment(request);
+        appointmentService.createAppointment(request);
 
         // Assert
-        assertNotNull(actualResponse);
-        verify(doctorService).findDoctorById(request.doctorId());
-        verify(appointmentRepository).save(any(Appointment.class));
+        verify(appointmentRepository).saveAll(anyIterable());
     }
 
     @Test
     void testCreateAppointmentDoctorNotFound() {
         // Arrange
-        AppointmentCreateRequest request = getAppointmentCreateRequest();
+        DoctorAppointmentCreateRequest request = getDoctorAppointmentCreateRequest();
 
-        when(doctorService.findDoctorById(RANDON_UUID)).thenThrow(new BusinessException("doctor not found"));
+        when(doctorService.findDoctorById(request.doctorId())).thenThrow(new BusinessException("doctor not found"));
 
         // Act & Assert
         assertThrows(BusinessException.class, () -> appointmentService.createAppointment(request));

@@ -2,8 +2,8 @@ package com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.impl;
 
 import com.fiap.hackathon.healthmed.doctor_api.core.service.AppointmentService;
 import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.AppointmentController;
-import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.AppointmentCreateRequest;
 import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.AppointmentUpdateRequest;
+import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.DoctorAppointmentCreateRequest;
 import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.response.AppointmentResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +25,9 @@ public class AppointmentControllerImpl implements AppointmentController {
     private final AppointmentService service;
 
     @Override
-    public ResponseEntity<AppointmentResponse> create(AppointmentCreateRequest request) {
-        return status(CREATED).body(service.createAppointment(request));
+    public ResponseEntity<Void> create(DoctorAppointmentCreateRequest request) {
+        service.createAppointment(request);
+        return status(CREATED).build();
     }
 
     @Override
