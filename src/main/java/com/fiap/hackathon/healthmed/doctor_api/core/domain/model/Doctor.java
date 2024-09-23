@@ -1,5 +1,6 @@
 package com.fiap.hackathon.healthmed.doctor_api.core.domain.model;
 
+import com.fiap.hackathon.healthmed.doctor_api.common.enums.UserAuthType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -48,4 +49,7 @@ public class Doctor {
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Appointment> appointments;
+
+    @Transient
+    private UserAuthType userType;
 }

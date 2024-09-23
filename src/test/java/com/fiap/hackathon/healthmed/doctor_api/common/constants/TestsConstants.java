@@ -1,10 +1,13 @@
 package com.fiap.hackathon.healthmed.doctor_api.common.constants;
 
+import lombok.experimental.UtilityClass;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.UUID;
 
+@UtilityClass
 public class TestsConstants {
 
     public static final UUID RANDON_UUID = UUID.randomUUID();

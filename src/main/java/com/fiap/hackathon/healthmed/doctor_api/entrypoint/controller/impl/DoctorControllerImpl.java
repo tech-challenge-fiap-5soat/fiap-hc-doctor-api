@@ -3,6 +3,7 @@ package com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.impl;
 import com.fiap.hackathon.healthmed.doctor_api.core.service.DoctorService;
 import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.DoctorController;
 import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.DoctorCreateRequest;
+import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.DoctorLoginRequest;
 import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.response.DoctorResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -30,5 +31,10 @@ public class DoctorControllerImpl implements DoctorController {
     @Override
     public ResponseEntity<List<DoctorResponse>> findAll() {
         return status(OK).body(service.findAllDoctors());
+    }
+
+    @Override
+    public ResponseEntity<String> login(DoctorLoginRequest request) {
+        return status(OK).body(service.loginAndGetAuthToken(request));
     }
 }

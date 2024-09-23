@@ -25,6 +25,11 @@ spring:
   jackson:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_y8Kq1GetQ/.well-known/jwks.json
 springdoc:
   swagger-ui:
     disable-swagger-default-url: false
@@ -35,4 +40,15 @@ springdoc:
     enabled: true
 swagger-servers-urls: http://localhost:${server.port}${server.servlet.context-path},http://127.0.0.1:${server.port}${server.servlet.context-path}
 
+feign:
+  client:
+    config:
+      auth-api:
+        service:
+          url: http://localhost:8099/api
 
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG

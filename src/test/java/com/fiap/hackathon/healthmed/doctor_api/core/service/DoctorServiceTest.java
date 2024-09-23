@@ -20,6 +20,7 @@ import static com.fiap.hackathon.healthmed.doctor_api.core.domain.model.DoctorTe
 import static com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.DoctorCreateRequestTestUtils.getDoctorCreateRequest;
 import static com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.response.DoctorResponseTestUtils.getDoctorResponse;
 import static com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.response.DoctorResponseTestUtils.getDoctorResponseAsList;
+import static java.lang.Boolean.TRUE;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -34,6 +35,9 @@ class DoctorServiceTest {
     @Mock
     private DoctorMapper doctorMapper;
 
+    @Mock
+    private AuthApiService authApiService;
+
     @InjectMocks
     private DoctorServiceImpl doctorService;
 
@@ -47,6 +51,7 @@ class DoctorServiceTest {
         when(doctorMapper.doctorCreateRequestToDoctor(any(DoctorCreateRequest.class))).thenReturn(expectedDoctor);
         when(doctorMapper.doctorToDoctorResponse(expectedDoctor)).thenReturn(response);
         when(doctorRepository.save(any(Doctor.class))).thenReturn(expectedDoctor);
+        when(authApiService.createCredentials(expectedDoctor)).thenReturn(TRUE);
 
         // Act
         DoctorResponse actualResponse = doctorService.createDoctor(request);

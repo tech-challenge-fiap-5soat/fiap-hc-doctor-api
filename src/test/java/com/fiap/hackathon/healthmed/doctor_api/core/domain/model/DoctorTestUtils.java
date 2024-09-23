@@ -9,7 +9,7 @@ import static com.fiap.hackathon.healthmed.doctor_api.common.constants.TestsCons
 public class DoctorTestUtils {
 
     public static Doctor getDoctor() {
-        return new Doctor(RANDON_UUID, NAME, CPF, CRM, EMAIL, null, null, null);
+        return new Doctor(RANDON_UUID, NAME, CPF, CRM, EMAIL, null, null, null, null);
     }
 
     public static Optional<Doctor> getOptionalOfDoctor() {
