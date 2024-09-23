@@ -46,6 +46,9 @@ feign:
       auth-api:
         service:
           url: http://localhost:8099/api
+      scheduling-api:
+        service:
+          url: http://localhost:8097/api
 
 logging:
   level:
