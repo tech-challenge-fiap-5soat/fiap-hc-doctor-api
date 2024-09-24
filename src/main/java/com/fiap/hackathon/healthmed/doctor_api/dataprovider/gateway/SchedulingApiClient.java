@@ -11,7 +11,7 @@ import java.util.UUID;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Component
-@FeignClient(value = "auth-api", url = "${feign.client.config.scheduling-api.service.url}")
+@FeignClient(value = "scheduling-api", url = "${feign.client.config.scheduling-api.service.url}")
 public interface SchedulingApiClient {
 
     @RequestMapping(method = POST, value = "/doctors/{doctorId}")

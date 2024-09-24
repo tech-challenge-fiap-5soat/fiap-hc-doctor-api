@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import static com.fiap.hackathon.healthmed.doctor_api.common.enums.UserAuthType.DOCTOR;
 import static jakarta.persistence.TemporalType.TIMESTAMP;
 
 @Entity
@@ -51,5 +52,8 @@ public class Doctor {
     private List<Appointment> appointments;
 
     @Transient
-    private UserAuthType userType;
+    private UserAuthType userType = DOCTOR;
+
+    @Transient
+    private String password;
 }
