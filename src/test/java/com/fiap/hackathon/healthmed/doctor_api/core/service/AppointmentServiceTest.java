@@ -5,6 +5,7 @@ import com.fiap.hackathon.healthmed.doctor_api.core.domain.mapper.AppointmentMap
 import com.fiap.hackathon.healthmed.doctor_api.core.domain.model.Appointment;
 import com.fiap.hackathon.healthmed.doctor_api.core.domain.model.Doctor;
 import com.fiap.hackathon.healthmed.doctor_api.core.service.impl.AppointmentServiceImpl;
+import com.fiap.hackathon.healthmed.doctor_api.dataprovider.gateway.SchedulingApiClient;
 import com.fiap.hackathon.healthmed.doctor_api.dataprovider.repository.AppointmentRepository;
 import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.AppointmentCreateRequest;
 import com.fiap.hackathon.healthmed.doctor_api.entrypoint.controller.payload.request.AppointmentUpdateRequest;
@@ -50,6 +51,8 @@ class AppointmentServiceTest {
     @Mock
     private DoctorService doctorService;
 
+    @Mock
+    private SchedulingApiClient schedulingApiClient;
     @InjectMocks
     private AppointmentServiceImpl appointmentService;
 
