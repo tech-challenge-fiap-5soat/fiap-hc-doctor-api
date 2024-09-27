@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'com.fiap.hc.doctor-api' is invalid and this project uses 'com.fiap.hc.doctor_api' instead.
+* The original package name 'com.fiap.hackathon.healthmed.doctor-api' is invalid and this project uses 'com.fiap.hackathon.healthmed.doctor_api' instead.
 
 # Getting Started
 

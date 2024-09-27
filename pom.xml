@@ -49,6 +49,7 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -90,16 +91,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jacoco</groupId>
-			<artifactId>jacoco-maven-plugin</artifactId>
-			<version>0.8.12</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>
@@ -150,35 +141,6 @@
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.12</version>
-				<configuration>
-					<dataFile>${jacoco.execution.data.file}</dataFile>
-					<excludes>
-<!--						com/fiap/hackathon/healthmed/doctor_api-->
-						<exclude>com/fiap/hackathon/healthmed/doctor_api/core/domain/entity/*</exclude>
-						<exclude>com/fiap/hackathon/healthmed/doctor_api/core/domain/mapper/*</exclude>
-						<exclude>com/fiap/hackathon/healthmed/doctor_api/dataprovider/gateway/request/*</exclude>
-						<exclude>com/fiap/hackathon/healthmed/doctor_api/common/config/*</exclude>
-					</excludes>
-				</configuration>
-				<executions>
-					<execution>
-						<id>prepate-agent</id>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
