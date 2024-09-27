@@ -101,7 +101,7 @@ This API was built using [Java](https://www.java.com/) and several tools:
 ```json
 {
   "doctorId": 1,
-  "appointments: [
+  "appointments": [
     {
       "date": "2024-01-01",
       "startTime": "08:00",
