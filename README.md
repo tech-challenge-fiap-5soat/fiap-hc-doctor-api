@@ -35,3 +35,121 @@ This API was built using [Java](https://www.java.com/) and several tools:
 - [Lombok](https://projectlombok.org/) - Library to reduce boilerplate code
 - [Docker](https://www.docker.com/) - Platform for developing, shipping, and running applications in containers 
 ------
+
+## Endpoints
+
+### 1. Create Doctor
+
+**POST** /doctors
+
+```json
+{
+"name": "Nome do Médico",
+"cpf": "CPF",
+"crm": "CRM",
+"email": "Email do Médico",
+"password": "Senha do Médico"
+}
+```
+**Response**: `201 Created` with the created doctor object.
+
+### 2. List all doctors
+
+**GET** /doctors
+
+**Response**: `200 OK` with the list of doctors.
+
+**Response Body**:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Nome do Médico",
+    "cpf": "CPF",
+    "crm": "CRM",
+    "email": "Email do Médico"
+  }
+]
+```
+
+### 3. Doctor login
+
+**POST** /doctors/login
+
+```json
+{
+  "email": "Email do Médico",
+  "password": "Senha do Médico"
+}
+```
+
+**Response**: `200 OK` with the login token.
+
+**Response Body**:
+
+```json
+{
+  "token": "Token de Autenticação"
+}
+```
+
+### 4. Create Doctor Appointment
+
+**POST** /appointments
+
+```json
+{
+  "doctorId": 1,
+  "appointments: [
+    {
+      "date": "2024-01-01",
+      "startTime": "08:00",
+      "endTime": "09:00"
+    },
+    {
+      "date": "2024-01-01",
+      "startTime": "09:00",
+      "endTime": "10:00"
+    }
+  ]
+}
+```
+
+**Response**: `201 Created` without content.
+
+### 5. Update Doctor Appointment
+
+**PUT** /appointments/{appointmentId}
+
+```json
+{
+  "date": "2024-01-01",
+  "startTime": "08:00",
+  "endTime": "09:00"
+}
+```
+
+**Response**: `200 OK` with the updated appointment object.
+
+### 6. List Doctor Appointments
+
+**GET** /appointments/{doctorId}
+
+**Response**: `200 OK` with the list of appointments.
+
+**Response Body**:
+
+```json
+[
+  {
+    "id": 1,
+    "doctorId": 1,
+    "date": "2024-01-01",
+    "startTime": "08:00",
+    "endTime": "09:00"
+  }
+]
+```
+
+
