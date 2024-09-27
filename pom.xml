@@ -151,23 +151,15 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.12</version>
-				<configuration>
-					<dataFile>${jacoco.execution.data.file}</dataFile>
-					<excludes>
-						<exclude>com/fiap/hackaton/healthmed/doctor_api/core/domain/entity/*</exclude>
-						<exclude>com/fiap/hackaton/healthmed/doctor_api/core/domain/mapper/*</exclude>
-						<exclude>**/config/*</exclude>
-					</excludes>
-				</configuration>
 				<executions>
 					<execution>
-						<id>prepate-agent</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
 					<execution>
 						<id>report</id>
+						<phase>prepare-package</phase>
 						<goals>
 							<goal>report</goal>
 						</goals>
